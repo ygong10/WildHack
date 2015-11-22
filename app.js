@@ -10,7 +10,7 @@ app.get('/', function(req, res){
 var id = 1;
 io.on('connection', function(socket){
 	var my_id = id ;
-	io.emit('user connected', 'User' + my_id + ' connected')
+	io.emit('user connected', 'Anon#' + my_id + ' is connected')
 	socket.on('chat message', function(msg){
 		io.emit('chat message', my_id + ": " + msg);
 	});
