@@ -26,10 +26,15 @@ io.on('connection', function(socket){
 		var test_it = test.fontcolor(rand_color);
 		io.emit('chat message', test_it + ": " + msg);
 	});
+	socket.on('disconnect', function() {
+		var test = "Anon#"+ my_id;
+		var test_it = test.fontcolor(rand_color);
+		io.emit('user disconnect', test_it + " has disconnected");
+	});
 	id++;
 	random_color = getRandomColor();
 });
 
-	http.listen(port, function(){
-	 	console.log('listening on ' + port);
+http.listen(port, function(){
+	console.log('listening on ' + port);
 });
