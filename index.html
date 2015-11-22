@@ -41,22 +41,28 @@
  	#messages li:nth-child(odd) {
 		background: #eee;
 	}
- </style>
- </head>
-	 <body>
-		 <h1>UIUC Chatroom!</h1>
-		 <ul id="messages"></ul>
-		 <form action="">
-		 	<input id="m" autocomplete="off" /><button>Send</button>
-		 </form>
-		 <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
-		 <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
-		 <script>
+</style>
+</head>
+	<body>
+		<div id="sidebar">
+			<ul id="items">
+				<li>#General</li>
+				<li>#Help</li>
+			</ul>
+		</div>
+		<h1>UIUC Chatroom!</h1>
+		<ul id="messages"></ul>
+		<form action="">
+			<input id="m" autocomplete="off" /><button>Send</button>
+		</form>
+		<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+		<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+		<script>
 
-		 function getRandomColor() {
-	     	var letters = '0123456789ABCDEF'.split('');
-	     	var color = '#';
-	    	for (var i = 0; i < 6; i++ ) {
+		function getRandomColor() {
+	    	var letters = '0123456789ABCDEF'.split('');
+	    	var color = '#';
+	   		for (var i = 0; i < 6; i++ ) {
 	        	color += letters[Math.floor(Math.random() * 16)];
 	    	}
 	    	return color;
@@ -78,6 +84,6 @@
 			$('#messages').append($('<li>').html(msg));
 		});
 
-		 </script>
-	 </body>
+		</script>
+	</body>
 </html>
