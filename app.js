@@ -20,21 +20,21 @@ var random_color = getRandomColor();
 io.on('connection', function(socket){
 	var my_id = id ;
 	var rand_color = random_color;
-	io.emit('user connected', ('Anon#' + my_id).fontcolor(rand_color) + ' is connected')
+	io.emit('user connected', ('Anon#' + my_id).fontcolor(rand_color) + ' has connected')
 	socket.on('chat message', function(msg){
 		var test = "Anon#"+ my_id;
 		var test_it = test.fontcolor(rand_color);
 		io.emit('chat message', test_it + ": " + msg);
 	});
-	//disconnect
-	socket.on('disconnected', function(){
-		var dc = ("Anon#" + my_id + " has disconnected").fontcolor(rand_color) ;
-		io.emit('chat message', dc);
+	socket.on('disconnect', function() {
+		var test = "Anon#"+ my_id;
+		var test_it = test.fontcolor(rand_color);
+		io.emit('user disconnect', test_it + " has disconnected");
 	});
 	id++;
 	random_color = getRandomColor();
 });
 
-	http.listen(port, function(){
-	 	console.log('listening on ' + port);
+http.listen(port, function(){
+	console.log('listening on ' + port);
 });
