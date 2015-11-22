@@ -13,7 +13,7 @@ function getRandomColor() {
 	return color;
 }
 app.get('/', function(req, res){
-	 res.sendFile(__dirname + '/index.html');
+	res.sendFile(__dirname + '/index.html');
 });
 var id = 1;
 var random_color = getRandomColor();
@@ -25,6 +25,11 @@ io.on('connection', function(socket){
 		var test = "Anon#"+ my_id;
 		var test_it = test.fontcolor(rand_color);
 		io.emit('chat message', test_it + ": " + msg);
+	});
+	//disconnect
+	socket.on('disconnected', function(){
+		var dc = ("Anon#" + my_id + " has disconnected").fontcolor(rand_color) ;
+		io.emit('chat message', dc);
 	});
 	id++;
 	random_color = getRandomColor();
