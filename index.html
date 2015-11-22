@@ -53,16 +53,28 @@
 		 <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
 		 <script>
 
-		 var anon_id = 1
+		 function getRandomColor() {
+	     	var letters = '0123456789ABCDEF'.split('');
+	     	var color = '#';
+	    	for (var i = 0; i < 6; i++ ) {
+	        	color += letters[Math.floor(Math.random() * 16)];
+	    	}
+	    	return color;
+		}
+
+		 //var anon_id = 1
 		 var socket = io();
 		 $('form').submit(function(){
 			 socket.emit('chat message', $('#m').val());
 			 $('#m').val('');
 			 return false;
 		 });
+		 	 socket.on('user connected', function(msg){
+		 	 	$('#messages').append($('<li>').text(msg));
+		 });
 			 socket.on('chat message', function(msg){
-			 $('#messages').append($('<li>').text('Anon'+ anon_id + ': ' + msg));
-			 anon_id += 1;
+			 $('#messages').append($('<li>').text('Anon' + msg));
+			 //anon_id += 1;
 		 });
 
 		 </script>
