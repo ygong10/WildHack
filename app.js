@@ -15,12 +15,23 @@ function getRandomColor() {
 app.get('/', function(req, res){
 	res.sendFile(__dirname + '/index.html');
 });
+var online = 0;
 var id = 1;
 var random_color = getRandomColor();
 io.on('connection', function(socket){
 	var my_id = id ;
 	var rand_color = random_color;
-	io.emit('user connected', ('Anon#' + my_id).fontcolor(rand_color) + ' has connected')
+	io.emit('user connected', ('Anon#' + my_id).fontcolor(rand_color) + ' has connected');
+	
+	//online++;
+	//io.emit('online_num', online);
+	
+	
+	socket.on('online_num', function(online){
+	online++;
+	io.emit('online_num', online);
+	});
+
 	socket.on('chat message', function(msg){
 		var test = "Anon#"+ my_id;
 		var test_it = test.fontcolor(rand_color);
@@ -30,6 +41,10 @@ io.on('connection', function(socket){
 		var test = "Anon#"+ my_id;
 		var test_it = test.fontcolor(rand_color);
 		io.emit('user disconnect', test_it + " has disconnected");
+		//if (online > 0){
+		//	online--;
+		//	io.emit('online_num', online);
+		//}
 	});
 	id++;
 	random_color = getRandomColor();

@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
  <head>
- 	<title>Socket.IO chat</title>
+ 	<title>Best chat NA</title>
  	<style>
  	* {
 		margin: 0;
@@ -51,6 +51,11 @@
 				<li>#Help</li>
 			</ul>
 		</div>
+
+		<div>
+			<p id="count">0</p>
+		</div>
+
 		<h1>UIUC Chatroom!</h1>
 		<ul id="messages"></ul>
 		<form action="">
@@ -77,14 +82,15 @@
 		});
 		socket.on('user connected', function(msg){
 			$('#messages').append($('<li>').html(msg));
+		
 		});
 		socket.on('chat message', function(msg){
 			$('#messages').append($('<li>').html(msg));
 		});
 		socket.on('user disconnect', function(msg) {
 			$('#messages').append($('<li>').html(msg));
-		});
 
+		});
 		</script>
 	</body>
 </html>
